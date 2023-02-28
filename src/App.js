@@ -33,10 +33,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        {/* <form onSubmit={handleFormSubmit}> */}
-          <input type="file" onChange={handleFileInputChange} />
-          <button onClick={(e)=>handleFormSubmit(e)}>上传文件</button>
-        {/* </form> */}
+        <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+          <input type="file" onChange={handleFileInputChange} name="files" multiple="multiple" encoding="utf-8"/>
+          <input type="submit" value="提交" encoding="utf-8"></input>
+        </form>
         {url && <img src={url} alt="Uploaded" />}
       </header>
     </div>
