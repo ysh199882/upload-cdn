@@ -26,6 +26,17 @@ function App() {
     .then(data => setUrl(data.file.url))
     .catch(error => console.error(error));
   }
+  
+  const copyUrl = ()=>{
+    const textToCopy = document.getElementById('text-to-copy');
+    const range = document.createRange();
+    range.selectNode(textToCopy);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    alert('已复制');
+  }
 
 
   return (
@@ -40,7 +51,8 @@ function App() {
 
         <div className='preview'>
           {url && <img src={url} alt="Uploaded" className='preview-img' />}
-          {url && <div className='preview-copy'>{url} <button>Copy</button></div>}
+          {url && <div className='preview-copy' id="text-to-copy">{url}</div>}
+          {url &&<button onClick={()=>{copyUrl()}}>Copy</button>}
         </div>
         
       </header>
