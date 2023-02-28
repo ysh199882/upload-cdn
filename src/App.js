@@ -31,13 +31,18 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
 
-        <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+        <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" >
           <input type="file" onChange={handleFileInputChange} name="files" multiple="multiple" encoding="utf-8"/>
           <input type="submit" value="提交" encoding="utf-8"></input>
         </form>
-        {url && <img src={url} alt="Uploaded" />}
+
+        <div className='preview'>
+          {url && <img src={url} alt="Uploaded" className='preview-img' />}
+          {url && <div className='preview-copy'>{url} <button>Copy</button></div>}
+        </div>
+        
       </header>
     </div>
   );
