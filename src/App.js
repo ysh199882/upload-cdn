@@ -17,7 +17,8 @@ function App() {
     const formData = new FormData();
     formData.append('image', file);
 
-    fetch('https://45ka3u4ky8.hk.aircode.run/index', {
+    // fetch('https://45ka3u4ky8.hk.aircode.run/index', {
+    fetch('http://192.168.103.101:8888/upload', {
       method: 'POST',
       body: formData
     })
@@ -50,14 +51,17 @@ function App() {
           <input type="submit" value="提交" encoding="utf-8"></input>
         </form>
 
-        <div className='preview'>
-          {url && <img src={url} alt="Uploaded" className='preview-img' />}
-          <div className='copy'>
-            {url && <div className='preview-copy' id="text-to-copy">{url}</div>}
-            {url && <button onClick={()=>{copyUrl()}} className='copy-btn'>Copy</button>}
+        {url &&
+          <div className='preview'>
+            <img src={url} alt="Uploaded" className='preview-img' />
+
+            <div className='copy'>
+              <div className='preview-copy' id="text-to-copy">{url}</div>
+              <button onClick={()=>{copyUrl()}} className='copy-btn'>Copy</button>
+            </div>
+
           </div>
-        </div>
-        
+        }
       </header>
     </div>
   );
