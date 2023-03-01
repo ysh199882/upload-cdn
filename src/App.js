@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+        <img src={logo} className="App-logo" alt="logo" />
 
         <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" >
           <input type="file" onChange={handleFileInputChange} name="files" multiple="multiple" encoding="utf-8"/>
