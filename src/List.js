@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Clipboard from 'clipboard';
+import Copy from 'copy-to-clipboard';
 import './App.css';
 
 
@@ -8,10 +8,7 @@ const List = ({ dataList }) => {
   
   const handleClick = (text) => {
     setCopyText(text);
-    const clipboard = new Clipboard('.copy-button');
-    clipboard.on('success', () => {
-      clipboard.destroy();
-    });
+    Copy(text);
   };
   
   return (
@@ -22,7 +19,7 @@ const List = ({ dataList }) => {
           <button className="copy-button" onClick={() => handleClick(item.url)}>Copy</button>
         </div>
       ))}
-      {copyText && <div className="copy-text">{copyText} copied to clipboard.</div>}
+      {copyText && <div className="copy-text">{copyText} 已复制.</div>}
     </div>
   );
 };
