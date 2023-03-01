@@ -1,67 +1,58 @@
 import React,{useState} from 'react';
 import logo from './logo.png';
 import './App.css';
+import List from './List.js'
+
+
 
 function App() {
 
-  const [file, setFile] = useState(null);
-  const [url, setUrl] = useState(null);
+  const [files, setFiles] = useState(null);
+  const [dataList,setDataList] = useState(null);//获取到alioss返回的文件信息列表
 
   const handleFileInputChange = (event) => {
-    setFile(event.target.files[0]);
+    const files = event.target.files;
+    setFiles(files);
   }
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
-    formData.append('image', file);
 
-    // fetch('https://45ka3u4ky8.hk.aircode.run/index', {
+    for (var i = 0, len = files.length; i < len; i++) {
+      formData.append('file', files[i]);
+    }
+
     fetch('http://192.168.103.101:8888/upload', {
-      method: 'POST',
+      method: 'post',
       body: formData
     })
     .then(response => 
       response.json())
     .then(data => {
-      setUrl(data.data.file.url)})
+      setDataList(data)
+    })
     .catch(error => console.error(error));
   }
-  
-  const copyUrl = ()=>{
-    const textToCopy = document.getElementById('text-to-copy');
-    const range = document.createRange();
-    range.selectNode(textToCopy);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    window.getSelection().removeAllRanges();
-    alert('已复制');
-  }
+
+
 
 
   return (
     <div className="App">
       <header className="App-header">
-        {!url && <img src={logo} className="App-logo" alt="logo" />}
+        <img src={logo} className="App-logo" alt="logo" />
 
-        <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" >
-          <input type="file" onChange={handleFileInputChange} name="files" multiple="multiple" encoding="utf-8"/>
+        <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" encType="multipart/form-data" >
+          <input type="file" onChange={handleFileInputChange} multiple name='file' />
           <input type="submit" value="提交" encoding="utf-8"></input>
         </form>
 
-        {url &&
+        
           <div className='preview'>
-            <img src={url} alt="Uploaded" className='preview-img' />
-
-            <div className='copy'>
-              <div className='preview-copy' id="text-to-copy">{url}</div>
-              <button onClick={()=>{copyUrl()}} className='copy-btn'>Copy</button>
-            </div>
-
+            <List dataList={dataList}></List>
           </div>
-        }
+        
       </header>
     </div>
   );
