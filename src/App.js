@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        {!url && <img src={logo} className="App-logo" alt="logo" />}
 
         <form onSubmit={handleFormSubmit} encoding="utf-8" action="/upload" method="post" >
           <input type="file" onChange={handleFileInputChange} name="files" multiple="multiple" encoding="utf-8"/>
