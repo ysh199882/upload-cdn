@@ -23,7 +23,8 @@ function App() {
     })
     .then(response => 
       response.json())
-    .then(data => setUrl(data.file.url))
+    .then(data => {
+      setUrl(data.data.file.url)})
     .catch(error => console.error(error));
   }
   
@@ -52,7 +53,7 @@ function App() {
         <div className='preview'>
           {url && <img src={url} alt="Uploaded" className='preview-img' />}
           {url && <div className='preview-copy' id="text-to-copy">{url}</div>}
-          {url &&<button onClick={()=>{copyUrl()}}>Copy</button>}
+          {url && <button onClick={()=>{copyUrl()}}>Copy</button>}
         </div>
         
       </header>
