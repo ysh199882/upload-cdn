@@ -52,8 +52,10 @@ function App() {
 
         <div className='preview'>
           {url && <img src={url} alt="Uploaded" className='preview-img' />}
-          {url && <div className='preview-copy' id="text-to-copy">{url}</div>}
-          {url && <button onClick={()=>{copyUrl()}}>Copy</button>}
+          <div className='copy'>
+            {url && <div className='preview-copy' id="text-to-copy">{url}</div>}
+            {url && <button onClick={()=>{copyUrl()}} className='copy-btn'>Copy</button>}
+          </div>
         </div>
         
       </header>
