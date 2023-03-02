@@ -26,7 +26,7 @@ const List = ({ dataList }) => {
         </div>
       ))}
       {copyText && <div className="copy-text">{copyText}已复制.</div>}
-      <button onClick={handleCopyAll} className="copy-all-button">一键转换格式并复制</button>
+      {dataList && <button onClick={handleCopyAll} className="copy-all-button">一键转换格式并复制</button>}
     </div>
   );
 };
