@@ -10,6 +10,12 @@ const List = ({ dataList }) => {
     setCopyText(text);
     Copy(text);
   };
+
+  const handleCopyAll = async () => {
+    const text = JSON.stringify(dataList.map(item => ({ [item.name]: item.url })));
+    Copy(text);
+    setCopyText(text)
+  };
   
   return (
     <div className="list">
@@ -19,7 +25,8 @@ const List = ({ dataList }) => {
           <button className="copy-button" onClick={() => handleClick(item.url)}>Copy</button>
         </div>
       ))}
-      {copyText && <div className="copy-text">{copyText} 已复制.</div>}
+      {copyText && <div className="copy-text">{copyText}已复制.</div>}
+      <button onClick={handleCopyAll} className="copy-all-button">一键转换格式并复制</button>
     </div>
   );
 };
